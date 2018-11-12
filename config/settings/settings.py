@@ -27,7 +27,7 @@ DEBUG = True
 
 MEDIA_ROOT = 'media/'
 
-MEDIA_URL = '/mdeia/'
+MEDIA_URL = '/media/'
 
 ALLOWED_HOSTS = []
 

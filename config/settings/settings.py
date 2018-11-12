@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'easy_thumbnails',
     'filer',
+    'gallery',
     'main',
     'rest_framework',
     'todolist',

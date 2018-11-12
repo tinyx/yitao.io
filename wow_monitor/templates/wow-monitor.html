@@ -1,0 +1,64 @@
+<script>
+  var simcRanks = {{ simc_ranks|safe }};
+</script>
+<style>
+  #rankChart {
+    margin: auto;
+  }
+</style>
+
+<body>
+  <div>
+    <canvas id="rankChart" width="800" height="600"></canvas>
+  </div>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script>
+  var ctx = document.getElementById("rankChart").getContext("2d");
+  var data = [];
+  for(var i=0; i<simcRanks.length; i++) {
+    data.push({x: new Date(simcRanks[i].rating_time), y: simcRanks[i].dps_rank});
+  }
+  var myLineChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      datasets: [{
+        label: 'Dps Rank Tracking for {{ name }}',
+        fill: false,
+        lineTension: 0.1,
+        backgroundColor: "rgba(75,192,192,0.4)",
+        borderColor: "rgba(75,192,192,1)",
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter',
+        pointBorderColor: "rgba(75,192,192,1)",
+        pointBackgroundColor: "#fff",
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: "rgba(75,192,192,1)",
+        pointHoverBorderColor: "rgba(220,220,220,1)",
+        pointHoverBorderWidth: 2,
+        pointRadius: 4,
+        pointHitRadius: 10,
+        data: data,
+        spanGaps: false,
+      }]
+    },
+    options: {
+      scales: {
+        xAxes: [{
+          type: 'time',
+          time: {
+            displayFormats: {
+              quarter: 'MMM D, hA'
+            }
+          }
+        }]
+      },
+      responsive: false
+    },
+  });
+</script>

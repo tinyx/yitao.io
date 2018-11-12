@@ -3,7 +3,7 @@ from datetime import date
 from django.views.generic import TemplateView
 from django.http import Http404
 
-from crabfactory.models import Profile
+from main.models import Profile
 
 
 class ChromeHomepage(TemplateView):

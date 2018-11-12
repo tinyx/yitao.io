@@ -1,4 +1,4 @@
-"""home URL Configuration
+"""yitao.io URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
@@ -17,10 +17,12 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
 
+from chrome_homepage.urls import urlpatterns as chrome_homepage_url
 from todolist.urls import urlpatterns as todolist_url
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
     url(r'^admin/', admin.site.urls),
+    url(r'^chrome-homepage/', include(chrome_homepage_url)),
     url(r'^todo/', include(todolist_url)),
 ]

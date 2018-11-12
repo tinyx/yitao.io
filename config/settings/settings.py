@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'main',
     'rest_framework',
     'todolist',
+    'wow_monitor',
 ]
 
 MIDDLEWARE = [

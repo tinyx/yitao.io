@@ -1,0 +1,74 @@
+.navbar-surface {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.navbar-background {
+  height: 56px;
+  z-index: 1029 !important;
+}
+
+#particle-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.tab-content {
+  margin-top: 140px;
+}
+
+.content-block {
+  padding-bottom: 70px;
+}
+
+.content-block ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.content-block ul li {
+  font-family: 'Open Sans';
+}
+
+.content-block h1 {
+  font-family: 'Open Sans';
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.content-block img {
+  margin-top: 20px;
+}
+
+.skill-row:nth-child(odd) .content-block {
+  flex-direction: row-reverse;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('../fonts/opensans-regular-webfont.eot');
+  src: url('../fonts/opensans-regular-webfont.eot?iefix') format('eot'),
+       url('../fonts/opensans-regular-webfont.woff') format('woff'),
+       url('../fonts/opensans-regular-webfont.ttf') format('truetype'),
+       url('../fonts/opensans-regular-webfont.svg#webfont') format('svg');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: 800;
+  src: url('../fonts/opensans-extrabold-webfont.eot');
+  src: url('../fonts/opensans-extrabold-webfont.eot?iefix') format('eot'),
+       url('../fonts/opensans-extrabold-webfont.woff') format('woff'),
+       url('../fonts/opensans-extrabold-webfont.ttf') format('truetype'),
+       url('../fonts/opensans-extrabold-webfont.svg#webfont') format('svg');
+}
+
+@media screen and (max-width: 1000px) {
+  .skill-row .content-block {
+    flex-direction: row !important;
+    justify-content: space-around !important;
+  }
+}

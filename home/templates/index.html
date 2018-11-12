@@ -1,0 +1,123 @@
+{% load static from staticfiles %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href=" {% static '/css/styles.css' %}">
+
+    <title>Welcome to Yitao's home</title>
+  </head>
+  <body>
+    <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light navbar-surface">
+      <a class="navbar-brand" href="#">Yitao Xiong</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-bar-toggler" aria-controls="nav-bar-toggler" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="nav-bar-toggler">
+        <ul class="nav navbar-nav ml-auto mt-2 mt-lg-0" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" role="tab" href="#skills">Skills</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" role="tab" href="#work">Work</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" role="tab" href="#about">About</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light navbar-background"></nav>
+
+    <div id="particle-background"></div>
+    <div class="tab-content container">
+      <div role="tabpanel" class="tab-pane fade active show" id="skills">
+        <div class="reveal-with-reset container skill-row">
+          <div class="row justify-content-center content-block">
+            <div class="col-3">
+                <img src="{% static 'img/problem_solving.svg' %}" width="150px" />
+            </div>
+            <div class="col-6">
+                <h1>Problem Solving</h1>
+                <ul>
+                  <li>All kinds of programming challenges are welcome</li>
+                  <li>System design, performance optimization, analysis</li>
+                  <li>Nothing feels better than getting to the bottom of a problem!</li>
+                </ul>
+            </div>
+          </div>
+        </div>
+        <div class="reveal-with-reset container skill-row">
+          <div class="row justify-content-center content-block">
+            <div class="col-3">
+                <img src="{% static 'img/django.svg' %}" width="100px" />
+            </div>
+            <div class="col-6">
+                <h1>Django</h1>
+                <ul>
+                  <li>I love Django! I have spent years working with it</li>
+                  <li>Familiar with source code of many modules of it</li>
+                  <li>Worked with many third-party libraries in the eco-system like DRF</li>
+                </ul>
+            </div>
+          </div>
+        </div>
+        <div class="reveal-with-reset container skill-row">
+          <div class="row justify-content-center content-block">
+            <div class="col-3">
+                <img src="{% static 'img/react.svg' %}" width="150px" />
+            </div>
+            <div class="col-6">
+                <h1>React</h1>
+                <ul>
+                  <li>After 2-3 years of jQuery experiences, so glad React showed up</li>
+                  <li>Building single-page-apps using React is so much fun</li>
+                  <li>Also have experiences building reusable base UI components</li>
+                </ul>
+            </div>
+          </div>
+        </div>
+        <div class="reveal-with-reset container skill-row">
+            <div class="row justify-content-center content-block">
+              <div class="col-3">
+                  <img src="{% static 'img/docker.svg' %}" width="160px" />
+              </div>
+              <div class="col-6">
+                  <h1>Docker</h1>
+                  <ul>
+                    <li>A little new to the technology, but getting familiar</li>
+                    <li>Building images is so much fun! So is helping it losing weight :)</li>
+                    <li>Very limited experience with k8s</li>
+                  </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div role="tabpanel" class="tab-pane fade" id="work">
+        <h3>WIP</h3>
+      </div>
+      <div role="tabpanel" class="tab-pane fade" id="about">
+        <h3>WIP</h3>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="{% static '/js/particles.min.js' %}"></script>
+    <script src="{% static '/js/control.js' %}"></script>
+    <script>
+      window.sr = ScrollReveal();
+      sr.reveal('.reveal-with-reset');
+    </script>
+  </body>
+</html>

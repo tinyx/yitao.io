@@ -1,0 +1,71 @@
+{% load static from staticfiles %}
+
+<link rel="stylesheet" href="{% static "css/searchbox-styles.css" %}" />
+<link rel="stylesheet" href="{% static "css/chrome-homepage.css" %}" />
+<link rel="stylesheet" href="{% static "live2d/css/live2d.css" %}" />
+
+{% if life_partner_name and days_since %}
+  <h1 class="days-summary">
+    你跟{{ life_partner_name }}认识已经<span class="days-counter">{{ days_since }}</span>天啦
+  </h1>
+{% endif %}
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol xmlns="http://www.w3.org/2000/svg" id="sbx-icon-search-13" viewBox="0 0 40 40">
+    <path d="M26.804 29.01c-2.832 2.34-6.465 3.746-10.426 3.746C7.333 32.756 0 25.424 0 16.378 0 7.333 7.333 0 16.378 0c9.046 0 16.378 7.333 16.378 16.378 0 3.96-1.406 7.594-3.746 10.426l10.534 10.534c.607.607.61 1.59-.004 2.202-.61.61-1.597.61-2.202.004L26.804 29.01zm-10.426.627c7.323 0 13.26-5.936 13.26-13.26 0-7.32-5.937-13.257-13.26-13.257C9.056 3.12 3.12 9.056 3.12 16.378c0 7.323 5.936 13.26 13.258 13.26z"
+    fill-rule="evenodd" />
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" id="sbx-icon-clear-3" viewBox="0 0 20 20">
+    <path d="M8.114 10L.944 2.83 0 1.885 1.886 0l.943.943L10 8.113l7.17-7.17.944-.943L20 1.886l-.943.943-7.17 7.17 7.17 7.17.943.944L18.114 20l-.943-.943-7.17-7.17-7.17 7.17-.944.943L0 18.114l.943-.943L8.113 10z" fill-rule="evenodd" />
+  </symbol>
+</svg>
+
+<div class="searchbox-container">
+  <form action="https://www.google.com/search" novalidate="novalidate" class="searchbox sbx-google">
+    <div role="q" class="sbx-google__wrapper">
+      <input type="search" name="q" placeholder="Google一下" autocomplete="off" required="required" class="sbx-google__input">
+      <button type="submit" title="Submit your search query." class="sbx-google__submit">
+        <svg role="img" aria-label="Search">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sbx-icon-search-13"></use>
+        </svg>
+      </button>
+      <button type="reset" title="Clear the search query." class="sbx-google__reset">
+        <svg role="img" aria-label="Reset">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sbx-icon-clear-3"></use>
+        </svg>
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="websites-container">
+  <div class="websites-inner-container">
+    {% for website in websites %}
+      <a class="websites-item" href="{{ website.url }}">
+        <p>{{ website.name }}</p>
+        <img src="{{ website.thumbnail.url }}" />
+      </a>
+    {% endfor %}
+  </div>
+</div>
+
+<div id="landlord">
+    <div class="message" style="opacity:0"></div>
+    <canvas id="live2d" width="280" height="400" class="live2d"></canvas>
+    <div class="hide-button">隐藏</div>
+</div>
+
+<script src="{% static "js/jquery-1.11.3.min.js" %}"></script>
+<script type="text/javascript">
+  document.querySelector('.searchbox [type="reset"]').addEventListener('click', function() {
+    this.parentNode.querySelector('input').focus();
+  });
+</script>
+<script type="text/javascript">
+  var message_Path = '{% static "live2d/" %}';
+</script>
+<script type="text/javascript" src="{% static "live2d/js/live2d.js" %}"></script>
+<script type="text/javascript" src="{% static "live2d/js/message.js" %}"></script>
+<script type="text/javascript">
+  loadlive2d("live2d", "{% static "live2d/model/miku/miku.model.json" %}");
+</script>

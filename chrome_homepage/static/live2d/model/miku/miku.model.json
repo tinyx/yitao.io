@@ -1,0 +1,44 @@
+{
+	"version":"Sample 1.0.0",
+	"model":"miku.moc",
+	"textures":[
+		"miku.2048/texture_00.png"
+	],
+	"hit_areas_custom":{
+		"head_x":[-0.35, 0.6],
+		"head_y":[0.19, -0.2],
+		"body_x":[-0.3, -0.25],
+		"body_y":[0.3, -0.9]
+	},
+	"motions":{
+		"null":[
+			{
+				"file":"motions/miku_m_01.mtn"
+			},
+			{
+				"file":"motions/miku_m_02.mtn"
+			},
+			{
+				"file":"motions/miku_m_03.mtn"
+			},
+			{
+				"file":"motions/miku_m_04.mtn"
+			},
+			{
+				"file":"motions/miku_m_05.mtn"
+			},
+			{
+				"file":"motions/miku_m_06.mtn"
+			},
+			{
+				"file":"motions/miku_shake_01.mtn"
+			}
+		],
+		"idle":[
+			{
+				"file":"motions/miku_idle_01.mtn"
+			}
+		]
+	},
+	"physics":"miku.physics.json"
+}

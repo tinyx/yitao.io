@@ -1,0 +1,87 @@
+html {
+  background: url('/static/img/cat-wall-paper.jpg');
+  background-size: cover;
+}
+
+h1.days-summary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 0;
+}
+
+span.days-counter {
+  width: 92px;
+  max-width: 92px;
+  font: bold 48px 'Droid Sans', Arial, sans-serif;
+  text-align: center;
+  color: #111;
+  background-color: #ddd;
+  background-image: -webkit-linear-gradient(top, #bbb, #eee);
+  background-image: -moz-linear-gradient(top, #bbb, #eee);
+  background-image: -ms-linear-gradient(top, #bbb, #eee);
+  background-image: -o-linear-gradient(top, #bbb, #eee);
+  border-top: 1px solid #fff;
+  border-radius: 3px;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.7);
+  margin: 0 7px;
+  padding: 18px 0;
+  display: inline-block;
+  position: relative;
+}
+
+span.days-counter:after {
+  content: "";
+  width: 100%;
+  height: 1px;
+  background: #eee;
+  border-top: 1px solid #333;
+  display: block;
+  position: absolute;
+  top: 48%;
+  left: 0;
+}
+
+.websites-container {
+  width: 100%;
+  padding: 50px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.websites-inner-container {
+  max-width: 976px;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.websites-item {
+  width: 200px;
+  height: 160px;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+  cursor: pointer;
+  position: relative;
+  transition-duration: 200ms;
+  transition-property: transform, box-shadow, margin, opacity, width;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  color: BLACK;
+  background: rgb(250,250,250);
+  margin: 20px;
+}
+
+.websites-item p {
+  height: 25px;
+  line-height: 14px;
+  overflow: hidden;
+  padding: 5px;
+  margin: 0;
+  text-overflow: ellipsis;
+}
+
+.websites-item img {
+  width: 100%;
+  height: 80%;
+}

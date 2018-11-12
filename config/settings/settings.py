@@ -41,7 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'chrome_homepage',
+    'django_extensions',
+    'easy_thumbnails',
+    'filer',
     'home',
+    'rest_framework',
     'todolist',
 ]
 

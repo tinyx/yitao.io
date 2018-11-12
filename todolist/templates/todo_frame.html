@@ -1,0 +1,27 @@
+{% load static %}
+<html>
+    <head>
+    <title>{% block title %}{% endblock %}</title>
+    <link href='http://fonts.googleapis.com/css?family=Oxygen:400,700|Quattrocento+Sans:400,700' rel='stylesheet' type='text/css'>
+    {% block extrastyle %}
+    {% endblock %}
+    </head>
+    <body>
+        <div class="headerwrapper">
+            <div class="header">
+                {% block header %}
+                <div class="navigation">
+                    <a href="{% url 'todo_login' %}" class="item">LOG IN</a>
+                    <p class="item">|</p>
+                    <a href="{% url 'todo_reg' %}" class="item">REGISTER</a>
+                </div>
+                {% endblock %}
+                <a class="logo" href="{% url 'todo_cover' %}"><img src="{% static "img/logo.png" %}" alt="Logo"/></a>
+            </div>
+        </div>
+        {% block content %}
+        {% endblock %}
+        {% block extrajs %}
+        {% endblock %}
+    </body>
+</html>

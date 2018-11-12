@@ -1,0 +1,33 @@
+@import "frame.scss";
+
+.content {
+    @include centered-container(900px);
+}
+
+.huge_logo {
+    @include centered-container(700px);
+    height: 200px;
+    background-image: url('../img/logo_huge.png');
+}
+
+.lines {
+    @include centered-container(700px);
+
+    .line {
+        height: 60px;
+        background-color: White;
+        padding: 10px 20px;
+        margin: 20px;
+        border-radius: 15px;
+        @include set-shadow(0, 0, 45px, #535353)
+    }
+
+    p {
+        font-family: $font-content;
+        font-size: 150%;
+        font-weight: 700;
+        margin: 10px 0;
+        text-align: center;
+        color: $color-font-blue;
+    }
+}

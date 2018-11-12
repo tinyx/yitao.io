@@ -1,0 +1,39 @@
+{% extends "todo_frame.html" %}
+{% load static from staticfiles %}
+{% block title %}2do-List | Register{% endblock %}
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static "css/reg.css" %}"/>
+{% endblock %}
+{% block content %}
+<div class="content">
+    <form class="wizard" action="{% url 'todo_reg' %}" method="post">
+        {% csrf_token %}
+        <div class="handwritting-logo"></div>
+        <ul>
+            <li>
+                <p>User Name:</p>
+                <input type="text" name="username" id="username">
+                <p>{{ error_info.username.errors }}</p>
+            </li>
+            <li>
+                <p>Password:</p>
+                <input type="password" name="password1" id="password1">
+                <p>{{ error_info.password1.errors }}</p>
+            </li>
+            <li>
+                <p>Confirm password:</p>
+                <input type="password" name="password2" id="password2">
+                <p>{{ error_info.password2.errors }}</p>
+            </li>
+            <li>
+                <p>E-mail:</p>
+                <input type="text" name="email" id="email">
+                <p>{{ error_info.email.errors }}</p>
+            </li>
+            </li>
+        </ul>
+        <p>{{ error_info.non_field_errors.errors }}</p>
+        <input type="submit" class="create_button" value="Create!">
+    </form>
+</div>
+{% endblock %}

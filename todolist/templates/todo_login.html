@@ -1,0 +1,26 @@
+{% extends "todo_frame.html" %}
+{% load static from staticfiles %}
+{% block title %}2do-List | Login{% endblock %}
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static "css/login.css" %}"/>
+{% endblock %}
+{% block content %}
+<div class="content">
+    <form class="wizard" action="{% url 'todo_login' %}" method="post">
+        {% csrf_token %}
+        <div class="handwritting-logo"></div>
+        <ul>
+            <li>
+                <div class="label username"></div>
+                <input type="text" name="username" id="username" placeholder="User Name">
+            </li>
+            <li>
+                <div class="label password"></div>
+                <input type="password" name="password" id="password" placeholder="Password">
+            </li>
+        </ul>
+        <p>{{ error_info }}</p>
+        <input type="submit" class="login_button" value="Login">
+    </form>
+</div>
+{% endblock %}

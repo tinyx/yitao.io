@@ -1,0 +1,23 @@
+{% extends "todo_frame.html" %}
+{% load static from staticfiles %}
+{% block title %}2do-List{% endblock %}
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static "css/cover.css" %}"/>
+{% endblock %}
+{% block content %}
+<div class="content">
+    <div class="huge_logo">
+    </div>
+    <div class="lines">
+        <div class="line">
+            <p>Wanna do lots of things, but quickly forget them?</p>
+        </div>
+        <div class="line">
+            <p>Used to write things down, but messed up?</p>
+        </div>
+        <div class="line">
+            <p>Try 2-do List, we will make it easier for you!</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

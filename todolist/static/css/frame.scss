@@ -1,0 +1,72 @@
+$font-title: 'Oxygen', sans-serif;
+$font-content: 'Quattrocento Sans', sans-serif;
+$color-font-blue: #1599d9;
+
+@mixin set-radius($radius) {
+    -webkit-border-radius: $radius; 
+    -moz-border-radius: $radius;
+    border-radius:$radius;
+}
+
+@mixin set-shadow($para1, $para2, $para3, $color) {
+    -webkit-box-shadow: $para1 $para2 $para3 $color;
+    -moz-box-shadow: $para1 $para2 $para3 $color;
+    box-shadow: $para1 $para2 $para3 $color;
+}
+
+@mixin centered-container($width) {
+    width: $width;
+    margin: auto;
+}
+
+body {
+    background-image: url("../img/background.png");
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    -webkit-background-size:100% 100%;
+    background-size:100% 100%;
+    margin: 0;
+}
+
+.headerwrapper {
+    height: 100px;
+    background-color:White;
+    padding: 0px 0px;
+    margin: 0px;
+}
+
+.header {
+    height: 80px;
+    background-color: White;
+    @include centered-container(900px);
+}
+
+.navigation {
+    width: 100%;
+
+    .item {
+        font-family:$font-title;
+        font-weight: 700;
+        font-size:150%;
+        color:$color-font-blue;
+        float:right;
+        text-decoration:none;
+        margin:20px 0px 0px 0px;
+        padding:5px;
+    }
+}
+
+@mixin button($width, $height) {
+    width: $width;
+    height: $height;
+    outline: none;
+    cursor: pointer;
+    font-family: $font-content;
+    font-weight: bold;
+    font-size: 140%;
+    text-align: center;
+    text-decoration: none;
+    text-shaddow: 0 1px 1px rgba(0, 0, 0, .3);
+    @include set-radius(2px);
+    @include set-shadow(0, 1px, 2px, rgba(0, 0, 0, .2));
+}

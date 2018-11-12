@@ -1,0 +1,130 @@
+{% extends "todo_frame.html" %}
+{% load static from staticfiles%}
+{% block title %}2do-List{% endblock %}
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"/>
+<link rel="stylesheet" type="text/css" href="{% static "css/jquery.ui.datepicker.css" %}"/>
+<link rel="stylesheet" type="text/css" href="{% static "css/jquery.ui.theme.css" %}"/>
+<script>
+var busy_url = "{% static "img/busy.gif" %}";
+</script>
+{% endblock %}
+{% block header %}
+<div class="navigation">
+    <a href="{% url 'todo_login' %}" class="item">LOG OUT</a>
+    <p class="item">|</p>
+    <a href="javascript:void(0)" class="item" onclick="showUserGuide()">USER GUIDE</a>
+</div>
+{% endblock %}
+{% block content %}
+<div class="content">
+    <table id="panel" cellpadding="0" cellspacing="0">
+        <tr valign="top">
+            <td id="panel-left">
+                <div id="class-label" onclick="$('#class-list').slideToggle()">
+                    <div id="class-icon" class="icons">
+                    </div>
+                    <p>Classes</p>
+                </div>
+                <ul id="class-list">
+                </ul>
+                <div id="add-new-class-label" onclick="$('#add-new-class-container').slideToggle()">
+                    <div id="add-icon" class="icons">
+                    </div>
+                    <p>Add new class</p>
+                </div>
+                <div id="add-new-class-container" style="display: none">
+                    <input type="text" onkeydown="classOnKeyDown()" id="add-new-class-input"/>
+                    <div id="add-new-class-button" onclick="addNewClass()">ADD</div>
+                </div>
+                <div id="recycle-bin-label">
+                    <div id="recycle-bin-icon" class="icons">
+                    </div>
+                    <p>Dustbin</p>
+                </div>
+            </td>
+            <td id="panel-right">
+                <div id="sorted-by">
+                    <div id="sorted-by-icons">
+                        <p>Sorted by:</p>
+                        <div title="Order" class="sorted-by-icon sorted-by-order selected" onclick="resortEvents('order')"></div>
+                        <div title="DueDate" class="sorted-by-icon sorted-by-duedate" onclick="resortEvents('duedate')"></div>
+                        <div title="Priority" class="sorted-by-icon sorted-by-priority" onclick="resortEvents('priority')"></div>
+                    </div>
+                </div>
+                <div id="current-class">
+                    <p>
+                    </p>
+                </div>
+                <ul id="event-list">
+                </ul>
+                <div class="add-new-event up">
+                    <div id="add-event-icon"></div>
+                    <p>Add new event</p>
+                 </div>
+                 <div class="add-new-event down">
+                    <input type="text" id="add-event-text" onkeydown="eventOnKeyDown();"/>
+                    <input type="text" readonly="readonly" id="calender" class="calender" />
+                    <div id="add-event-button" onclick="addNewEvent();"></div>
+                </div>
+                <div id="show-done-event">
+                    <p onclick="displayDoneListStarter();">Show Done Events</p>
+                </div>
+                <ul id="done-list">
+                </ul>
+            </td>
+        </tr>
+    </table>
+    <div id="general-hint-window">
+        <div class="hint-window-icon"></div>
+        <p></p>
+        <div class="close-hint-window" onclick="hideGeneralHintWindow();"></div>
+    </div>
+    <div id="pri-hint-window">
+        <p>Priority legend:</p>
+        <div class="pri-legend high">
+        </div>
+        <p>High</p>
+        <div class="pri-legend medium">
+        </div>
+        <p>Medium</p>
+        <div class="pri-legend normal">
+        </div>
+        <p>Normal</p>
+        <div class="pri-legend low">
+        </div>
+        <p>Low</p>
+    </div>
+    <div id="user-guide-container">
+        <div id="display-class-guide">
+            <div class="guide-border"></div>
+        </div>
+        <div id="add-class-guide">
+            <div class="guide-border"></div>
+        </div>
+        <div id="display-event-guide">
+            <div class="guide-border"></div>
+        </div>
+        <div id="sort-event-guide">
+            <div class="guide-border">
+            </div>
+        </div>
+        <div id="add-event-guide">
+            <div class="guide-border">
+            </div>
+        </div>
+        <div id="remove-guide">
+            <div class="guide-border">
+            </div>
+        </div>
+        <div id="done-event-guide">
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extrajs %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="{% static "js/jquery.blockUI.js" %}"></script>
+<script src="{% static "js/todo-control.js" %}"></script>
+{% endblock %}

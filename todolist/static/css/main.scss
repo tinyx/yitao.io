@@ -1,0 +1,661 @@
+@import "frame.scss";
+$color-panel-gray: #e8e8e8;
+$color-label-gray: #f5f5f5;
+$color-text-gray: #515151;
+$color-overdue: #ff0000;
+$color-due-today: #f4b52e;
+$color-due-shortly: #00b115;
+$color-due-longer: #0065ab;
+$color-due-very-long: #9c9c9c;
+$color-hint-window: #555B63;
+$color-recycle-bin-red: #c50000;
+
+.content {
+    @include centered-container(900px);
+    margin-top: 50px;
+}
+
+#panel {
+    width: 100%;
+    min-height: 400px;
+
+    #panel-left {
+        background-color: $color-panel-gray;
+        margin: 0;
+        padding: 0;
+        width: 30%;
+        border-right: 1px solid $color-panel-gray;
+        position: relative;
+        z-index: 999;
+
+        #class-label, #add-new-class-label, #recycle-bin-label {
+            background-color: $color-label-gray;
+            height: 60px;
+            border-bottom: 1px solid $color-panel-gray;
+            border-top: 1px solid $color-panel-gray;
+
+            p {
+                cursor: default;
+            }
+        }
+        #recycle-bin-label.recycle-on-drop {
+            background-color: $color-recycle-bin-red;
+            background: -webkit-gradient(linear, 0 0, 100% 0, from(#d91414), to(#e47070));
+            background: -moz-linear-gradient(left, #d91414, #e47070);
+
+            p {
+                color: White;
+            }
+            div {
+                background-position: -180px 0;
+            }
+        }
+        #class-list {
+            @include centered-container(100%);
+            list-style: none;
+            cursor: default;
+            padding: 0;
+
+            li {
+                width: 100%;
+                height: 50px;
+                font-family: $font-title;
+                font-weight: 700;
+                overflow: visible;
+
+                .class-name-div {
+                    color: $color-font-blue;
+                    padding: 0 20px;
+                }
+                table {
+                    @include centered-container(90%);
+                    height: 100%;
+                    padding: 0;
+
+                    .del-td {
+                        width: 15%;
+                        text-align: right;
+                    }
+                    .del-div {
+                        width: 35px;
+                        height: 35px;
+                        overflow: hidden;
+                        background-image: url("../img/classDel.png");
+                        background-position: 0 0;
+                    }
+                }
+                &.sortable-placeholder {
+                    margin: 0;
+                    padding: 0;
+                    border: 1px dashed Black;
+                    background: none;
+                }
+                &.selected {
+                    background-image: url("../img/classListBG.png");
+                    background-color: inherit;
+                    width: 107%;
+                    background-position: 0 -5px;
+
+                    .class-name-div {
+                        color: White;
+                    }
+                    .del-div {
+                        margin-right: 21px;
+                        background-position: 35px 0;
+                    }
+                }
+                &:not(.selected):hover {
+                    background-color: White;
+                }
+            }
+        }
+        #add-new-class-container {
+            padding: 10px;
+
+            #add-new-class-input {
+                display: inline-block;
+            }
+            #add-new-class-button {
+                display: inline-block;
+                @include button(50px, 20px);
+                vertical-align: middle;
+                font-size: 100%;
+                color: #d9eef7;
+                border: solid 1px #0076a3;
+                background: #0095cd;
+                background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
+                background: -moz-linear-gradient(top,  #00adee,  #0078a5);
+                filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee', endColorstr='#0078a5');
+
+                &:hover {
+                    background: #007ead;
+                    background: -webkit-gradient(linear, left top, left bottom, from(#0095cc), to(#00678e));
+                    background: -moz-linear-gradient(top,  #0095cc,  #00678e);
+                    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#0095cc', endColorstr='#00678e');
+                }
+                &:active {
+                    color: #80bed6;
+                    background: -webkit-gradient(linear, left top, left bottom, from(#0078a5), to(#00adee));
+                    background: -moz-linear-gradient(top,  #0078a5,  #00adee);
+                    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#0078a5', endColorstr='#00adee');
+                }
+            }
+        }
+        .icons {
+            width: 60px;
+            height: 60px;
+            float: left;
+        }
+        #class-icon {
+            background: url("../img/leftIcons.png") 0 0;
+        }
+        #add-icon {
+            background: url("../img/leftIcons.png") -60px 0;
+        }
+        #recycle-bin-icon {
+            background: url("../img/leftIcons.png") -120px 0;
+        }
+        p {
+            margin: 0;
+            padding-top: 20px;
+            font-family: $font-content;
+            font-size: 150%;
+            color: #0e93d5;
+            text-align: left;
+            vertical-align: middle;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    }
+
+    #panel-right {
+        background-color: White;
+        margin: 0;
+        padding: 0;
+        width: 70%;
+
+        #sorted-by {
+            width: 100%;
+            height: 60px;
+            background-color: $color-label-gray;
+            border-bottom: 1px solid $color-panel-gray;
+            border-top: 1px solid $color-panel-gray;
+
+            #sorted-by-icons {
+                width: 200px;
+                height: 40px;
+                padding: 10px 20px;
+                float: right;
+
+                p {
+                    width: 40%;
+                    font-family: $font-content;
+                    font-size: 60%;
+                    color: $color-text-gray;
+                    display: inline-block;
+                    vertical-align: top;
+                }
+                div {
+                    width: 36px;
+                    height: 36px;
+                    background-image: url("../img/sortedbyicons.png");
+                    display: inline-block;
+
+                    &.sorted-by-order {
+                        background-position: 0 0;
+
+                        &:hover {
+                            background-position: 0 -36px;
+                        }
+                        &.selected {
+                            background-position: 0 -72px;
+                        }
+                    }
+                    &.sorted-by-duedate {
+                        background-position: -36px 0;
+
+                        &:hover {
+                            background-position: -36px -36px;
+                        }
+                        &.selected {
+                            background-position: -36px -72px;
+                        }
+                    }
+                    &.sorted-by-priority {
+                        background-position: -72px 0;
+
+                        &:hover {
+                            background-position: -72px -36px;
+                        }
+                        &.selected {
+                            background-position: -72px -72px;
+                        }
+                    }
+                }
+            }
+        }
+        #current-class {
+            width: 100%;
+            height: 50px;
+
+            p {
+                height: 30px;
+                margin: auto 30px;
+                font-family: $font-title;
+                font-size: 130%;
+                color: Black;
+                text-align: left;
+                vertical-align: bottom;
+                border-bottom: 1px solid $color-panel-gray;
+            }
+        }
+        #event-list {
+            @include centered-container(100%);
+            padding: 0;
+            list-style: none;
+            text-align: center;
+
+            li {
+                height: 35px;
+                margin: 0 15px;
+                padding: 0;
+                border-bottom: 1px solid $color-panel-gray;
+
+                table {
+                    margin: 0;
+                    padding: 0;
+                    width: 100%;
+                    height: 100%;
+                    padding-left: 20px;
+
+                    .event-pri-td {
+                        width: 5%;
+
+                        .event-pri {
+                            @include centered-container(30px);
+                            position: relative;
+                            height: 30px;
+                            background-image: url("../img/priorities.png");
+
+                            &.pri0 {
+                                background-position: 0 0,
+                            }
+                            &.pri1 {
+                                background-position: -30px 0,
+                            }
+                            &.pri2 {
+                                background-position: 0 -30px,
+                            }
+                            &.pri3 {
+                                background-position: -30px -30px,
+                            }
+                        }
+                        .pri-picker {
+                            width:30px;
+                            height:30px;
+                            background-color:White;
+                            padding: 0;
+
+                            tr {
+                                height: 50%;
+
+                                td {
+                                    width: 50%;
+
+                                    &.cell0 {
+                                        background-color: $color-due-longer;
+                                    }
+                                    &.cell1 {
+                                        background-color: $color-due-shortly;
+                                    }
+                                    &.cell2 {
+                                        background-color: $color-due-today;
+                                    }
+                                    &.cell3 {
+                                        background-color: $color-overdue;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .event-check-td {
+                        width: 5%;
+                    }
+                    .event-text-td {
+                        width: 65%;
+
+                        .event-text {
+                            background-color: inherit;
+                            border-width: 0;
+                            width: 100%;
+                            height: 100%;
+                            vertical-align: bottom;
+                            font-family: $font-content;
+                        }
+                    }
+                    .event-due-td {
+                        width: 20%;
+
+                        .event-due {
+                            width: 90px;
+                            height: 20px;
+                            text-align: center;
+                            padding-top: 5px;
+                            margin-left: 10px;
+                            font-family: $font-content;
+                            font-weight: 700;
+                            font-size: 70%;
+                            color: White;
+
+                            &.event-overdue {
+                                background-color: $color-overdue;
+                            }
+                            &.event-due-today {
+                                background-color: $color-due-today;
+                            }
+                            &.event-due-shortly {
+                                background-color: $color-due-shortly;
+                            }
+                            &.event-due-longer {
+                                background-color: $color-due-longer;
+                            }
+                            &.event-due-very-long {
+                                background-color: $color-due-very-long;
+                            }
+                        }
+                    }
+                    .event-del-td {
+                        width: 5%;
+
+                        div {
+                            width: 20px;
+                            height: 20px;
+                            visibility: hidden;
+                            background-image: url("../img/eventDel.png");
+                            background-position: 0 0;
+
+                            &:hover {
+                                background-position: -20px -20px;
+                            }
+                        }
+                    }
+                }
+                &.sortable-placeholder {
+                    border: 1px dashed Black;
+                    background: none;
+                }
+            }
+            &.undraggable li {
+                background-color: $color-panel-gray;
+            }
+            & li:hover {
+                background-color: $color-label-gray;
+
+                .event-del {
+                    visibility: visible;
+                }
+            }
+        }
+        .add-new-event {
+            width: 100%;
+            height: 40px;
+            background-color: $color-label-gray;
+
+            &.up {
+                margin-top: 30px;
+                border-top: 1px solid $color-panel-gray;
+
+                div {
+                    display: inline-block;
+                    width: 40px;
+                    height: 40px;
+                    margin-left: 10px;
+                    background-image: url("../img/addEventIcon.png");
+                }
+                p {
+                    display: inline-block;
+                    font-family: $font-title;
+                    font-weight: 700;
+                    font-size: 80%;
+                    color: $color-text-gray;
+                    vertical-align: top;
+                }
+            }
+            &.down {
+                border-bottom: 1px solid $color-panel-gray;
+
+                #add-event-text {
+                    display: inline-block;
+                    width: 60%;
+                    margin-left: 15px;
+                }
+                #add-event-button {
+                    display: inline-block;
+                    width: 40px;
+                    height: 20px;
+                    vertical-align: middle;
+                    border: 1px solid #dddddd;
+                    background-image: url("../img/newEventButton.png");
+
+                    &:hover {
+                        background-position: 0 -20px;
+                    }
+                }
+            }
+        }
+        #show-done-event {
+            width: 100%;
+            height: 20px;
+
+            p {
+                margin-left: 15px;
+                font-family: $font-title;
+                font-weight: 700;
+                font-size: 80%;
+                text-decoration: underline;
+                cursor: pointer;
+                color: $color-text-gray;
+            }
+        }
+        #done-list {
+            margin: 10px 0;
+            padding: 0 20px;
+            list-style: none;
+
+            li {
+                cursor: default;
+                width: 100%;
+                height: 12px;
+
+                .done-event-text, .done-event-due {
+                    display: inline-block;
+                    font-family: $font-content;
+                    font-size: 70%;
+                    font-color: $color-text-gray;
+                }
+                .done-event-text {
+                    text-decoration: line-through;
+                }
+                .done-event-due {
+                    margin-left: 20px;
+                }
+                &.sortable-placeholder {
+                    border: 1px dashed Black;
+                    background: none;
+                }
+            }
+        }
+    }
+}
+
+.hint-window {
+    position: absolute;
+    height: 30px;
+    top: 110px;
+    background-color: $color-hint-window;
+    cursor: default;
+    display: none;
+
+    p {
+        float: left;
+        text-align: left;
+        font-family: $font-title;
+        font-weight: 700;
+        font-size: 70%;
+        color: White;
+        margin: 0 2px;
+        padding: 7px 7px 0 7px;
+    }
+}
+
+#pri-hint-window {
+    @extend .hint-window;
+    width: 400px;
+
+    div {
+        width: 20px;
+        height: 20px;
+        float: left;
+        margin-top: 5px;
+
+        &.high {
+            background-color: $color-overdue;
+        }
+        &.medium {
+            background-color: $color-due-today;
+        }
+        &.normal {
+            background-color: $color-due-shortly;
+        }
+        &.low {
+            background-color: $color-due-longer;
+        }
+    }
+}
+
+#general-hint-window {
+    @extend .hint-window;
+    width: 600px;
+
+    .hint-window-icon {
+        width: 30px;
+        height: 30px;
+        float: left;
+        background-image: url("../img/bulb.png");
+    }
+    .close-hint-window {
+        width: 30px;
+        height: 30px;
+        float: right;
+        background-image: url("../img/closeHintWindow.png");
+
+        &:hover {
+            background-position: -30px 0;
+        }
+    }
+}
+
+#user-guide-container {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    background-color: rgba(0,0,0,0.6);
+
+    div {
+        position: absolute;
+
+        .guide-border {
+            border: 5px dashed Gray;
+        }
+        &#display-class-guide {
+            width: 400px;
+            height: 300px;
+            background-image: url("../img/displayClassesGuide.png");
+
+            .guide-border {
+                width: 270px;
+                height: 200px;
+                position: relative;
+                left: 0;
+                top: 100px;
+            }
+        }
+        &#add-class-guide {
+            width: 400px;
+            height: 200px;
+            background-image: url("../img/addClassGuide.png");
+
+            .guide-border {
+                width: 270px;
+                height: 80px;
+                position: relative;
+                left: 0;
+                top: 120px;
+            }
+        }
+        &#remove-guide {
+            width: 400px;
+            height: 200px;
+            background-image: url("../img/removeGuide.png");
+
+            .guide-border {
+                width: 270px;
+                height: 80px;
+                position: relative;
+                left: 0;
+                top: 120px;
+            }
+        }
+        &#sort-event-guide {
+            width: 350px;
+            height: 150px;
+            background-image: url("../img/sortEventGuide.png");
+
+            .guide-border {
+                width: 250px;
+                height: 60px;
+                position: relative;
+                left: 90px;
+                top: 70px;
+            }
+        }
+        &#add-event-guide {
+            width: 650px;
+            height: 300px;
+            background-image: url("../img/addEventGuide.png");
+
+            .guide-border {
+                width: 640px;
+                height: 120px;
+                position: relative;
+                top: 180px;
+            }
+        }
+        &#done-event-guide {
+            width: 300px;
+            height: 300px;
+            background-image: url("../img/doneEventGuide.png");
+        }
+        &#display-event-guide {
+            width: 800px;
+            height: 500px;
+            background-image: url("../img/displayEventGuide.png");
+
+            .guide-border {
+                width: 640px;
+                height: 120px;
+                position: relative;
+                left: 85px;
+                top: 190px;
+            }
+        }
+    }
+}

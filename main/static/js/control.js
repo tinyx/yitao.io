@@ -78,4 +78,4 @@ $(document).ready(function() {
       "retina_detect": true
     });
   })();
-})
+});

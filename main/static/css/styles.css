@@ -16,7 +16,7 @@
 }
 
 .tab-content {
-  margin-top: 140px;
+  margin-top: 100px;
 }
 
 .content-block {
@@ -45,6 +45,63 @@
 
 .skill-row:nth-child(odd) .content-block {
   flex-direction: row-reverse;
+}
+
+#projects > .container > .row {
+  margin-bottom: 20px;
+}
+
+.card-container {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.card {
+  height: 450px;
+  background: WHITE;
+}
+
+.card .label {
+  border-radius: 30px;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  left: 20px;
+  bottom: 20px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  position: absolute;
+  -webkit-box-shadow: 0px 0px 35px 0px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 0px 35px 0px rgba(0,0,0,0.3);
+  box-shadow: 0px 0px 35px 0px rgba(0,0,0,0.3);
+}
+
+.todo-list-card {
+  background: url("../img/2do-list-background.png") top center no-repeat;
+  background-size: auto 745px;
+}
+
+.todo-list-card .row {
+  justify-content: center;
+}
+
+.todo-list-card .logo {
+  height: 100%;
+  margin-top: 35px;
+}
+
+.todo-list-card .sub-title {
+  color: WHITE;
+  font-size: 13px;
+}
+
+.todo-list-card .preview {
+  height: 100%;
+}
+
+.todo-list-card .label {
+  background: #1065c4;
 }
 
 @font-face {

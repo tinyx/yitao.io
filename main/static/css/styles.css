@@ -72,8 +72,8 @@
   color: white;
   font-size: 10px;
   font-weight: bold;
-  left: 20px;
-  bottom: 20px;
+  left: 22px;
+  bottom: 22px;
   letter-spacing: 3px;
   text-transform: uppercase;
   padding: 10px 20px;
@@ -127,7 +127,6 @@
 }
 
 .gallery-card .preview {
-  width: 500px;
   position: absolute;
   -webkit-box-shadow: 0px 0px 35px 0px rgba(0,0,0,0.3);
   -moz-box-shadow: 0px 0px 35px 0px rgba(0,0,0,0.3);
@@ -135,8 +134,8 @@
 }
 
 .gallery-card .preview.preview-1 {
-  height: 107%;
-  width: 107%;
+  height: 500px;
+  width: 790px;
   position: absolute;
   left: 50%;
   top: 0;
@@ -154,6 +153,55 @@
   color: BLACK;
 }
 
+.wow-monitor-card {
+  background: url('../img/wow-monitor-background.jpg') top center no-repeat;
+  background-size: auto 600px;
+}
+
+.wow-monitor-card .row {
+  margin-top: 150px;
+  justify-content: center;
+}
+
+.wow-monitor-card .row .title {
+  position: absolute;
+  height: 45px;
+  max-width: 100%;
+  left: 5%;
+  top: 25%;
+  z-index: 1;
+}
+
+.wow-monitor-card .preview {
+  position: absolute;
+  height: 100%;
+  -webkit-box-shadow: 0px 0px 35px 0px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 0px 35px 0px rgba(0,0,0,0.3);
+  box-shadow: 0px 0px 35px 0px rgba(0,0,0,0.3);
+}
+
+.wow-monitor-card .preview.preview-1 {
+  height: 250px;
+  position: absolute;
+  left: 22%;
+  bottom: 10px;
+  z-index: 1;
+  border-radius: 5px;
+}
+
+.wow-monitor-card .preview.preview-2 {
+  height: 90%;
+  left: 45%;
+  top: 25%;
+  position: absolute;
+  background: rgba(255, 255, 255, .98);
+  border-radius: 10px;
+}
+
+.wow-monitor-card .label {
+  background: #111e33;
+  color: #dbdbdb;
+}
 
 @font-face {
   font-family: 'Open Sans';

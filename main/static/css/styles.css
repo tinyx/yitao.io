@@ -47,13 +47,10 @@
   flex-direction: row-reverse;
 }
 
-#projects > .container > .row {
-  margin-bottom: 20px;
-}
-
 .card-container {
   padding-left: 0;
   padding-right: 0;
+  margin-bottom: 20px;
 }
 
 .card {

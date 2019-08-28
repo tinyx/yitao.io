@@ -10,7 +10,6 @@ class RpsProxyView(APIView):
 
     def post(request, *args, **kwargs):
         response = requests.get('https://rps.lucaspickering.me/api/matches/new/')
-        print json.loads(response.content)
         return Response({
             'response_type': 'in_channel',
             'text': 'https://rps.lucaspickering.me/matches/live/{}'

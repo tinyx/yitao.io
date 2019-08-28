@@ -23,6 +23,7 @@ from chrome_homepage.urls import urlpatterns as chrome_homepage_url
 from gallery.urls import urlpatterns as gallery_url
 from todolist.urls import urlpatterns as todolist_url
 from wow_monitor.urls import urlpatterns as wow_monitor_url
+from rps_proxy.views import RpsProxyView
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
@@ -33,4 +34,5 @@ urlpatterns = [
     url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     url(r'^todo/', include(todolist_url)),
     url(r'^wow-monitor/', include(wow_monitor_url)),
+    url(r'^rps/new', RpsProxyView.as_view(), name='rps_new'),
 ]

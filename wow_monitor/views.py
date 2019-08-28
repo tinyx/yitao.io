@@ -2,7 +2,6 @@ import json
 
 from django.views.generic import TemplateView
 from django.http import HttpResponse, Http404
-from rest_framework import generics
 
 from wow_monitor.models import Character, SimcRank
 

@@ -13,5 +13,8 @@ class RpsProxyView(APIView):
         return Response({
             'response_type': 'in_channel',
             'text': 'https://rps.lucaspickering.me/matches/live/{}'
-                .format(json.loads(response.content)['match_id'])
+                .format(json.loads(response.content)['match_id']),
+            'attachments': [{
+                'text': 'Let the battle begin!'
+            }]
         })

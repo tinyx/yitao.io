@@ -1,8 +1,7 @@
 *.pyc
 *.map
 bin/
-.*
-/static
+static
 /media
 settings_production.py
 todolist/static/css/cover.css

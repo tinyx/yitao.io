@@ -28,4 +28,6 @@ RUN pip install -r requirements.txt
 
 COPY . /code/
 
+RUN ./manage.py collectstatic
+
 CMD dockerize -wait tcp://db:5432 && ./manage.py runserver 0.0.0.0:8000

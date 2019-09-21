@@ -28,6 +28,8 @@ RUN pip install -r requirements.txt
 
 COPY . /code/
 
-RUN ./manage.py collectstatic
+COPY ./favicon.ico /code/static/favicon.ico
+
+RUN ./manage.py collectstatic --noinput
 
 CMD dockerize -wait tcp://db:5432 && ./manage.py runserver 0.0.0.0:8000

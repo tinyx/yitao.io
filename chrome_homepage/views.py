@@ -11,7 +11,6 @@ class ChromeHomepage(TemplateView):
 
     def get_context_data(self, **kwargs):
         profile_guid = kwargs.get('profile_guid')
-        print profile_guid
         try:
             profile = Profile.objects.get(guid=profile_guid)
             context = super(ChromeHomepage, self).get_context_data(**kwargs)

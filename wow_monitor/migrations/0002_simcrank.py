@@ -7,20 +7,32 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wow_monitor', '0001_initial'),
+        ("wow_monitor", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='SimcRank',
+            name="SimcRank",
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('dps_rank', models.IntegerField()),
-                ('rating_time', models.DateTimeField(auto_now_add=True)),
-                ('character', models.ForeignKey(to='wow_monitor.Character')),
+                (
+                    "id",
+                    models.AutoField(
+                        verbose_name="ID",
+                        serialize=False,
+                        auto_created=True,
+                        primary_key=True,
+                    ),
+                ),
+                ("dps_rank", models.IntegerField()),
+                ("rating_time", models.DateTimeField(auto_now_add=True)),
+                (
+                    "character",
+                    models.ForeignKey(
+                        to="wow_monitor.Character", on_delete=models.CASCADE
+                    ),
+                ),
             ],
-            options={
-            },
+            options={},
             bases=(models.Model,),
         ),
     ]

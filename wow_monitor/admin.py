@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from models import Character, SimcRank
+from .models import Character, SimcRank
 
 class SimcRankAdmin(admin.ModelAdmin):
     readonly_fields = ('rating_time',)

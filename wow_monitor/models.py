@@ -26,30 +26,42 @@ class Character(models.Model):
     artifactTraits = models.TextField(blank=True, null=True)
 
     def __unicode__(self):
-        return '{server_name} - {name}'.format(
-            server_name=self.server_name,
-            name=self.name
+        return "{server_name} - {name}".format(
+            server_name=self.server_name, name=self.name
         )
 
     def fetch_from_battlenet(self):
         api_key = settings.BN_APIKEY
-        url = 'https://us.api.battle.net/wow/character/{server_name}/{char_name}?'\
-              'fields=items+talents&locale=en_US&apikey={api_key}'.format(
-                  server_name=self.server_name,
-                  char_name=self.name,
-                  api_key=api_key
-              )
+        url = (
+            "https://us.api.battle.net/wow/character/{server_name}/{char_name}?"
+            "fields=items+talents&locale=en_US&apikey={api_key}".format(
+                server_name=self.server_name, char_name=self.name, api_key=api_key
+            )
+        )
         response = requests.get(url)
         data = json.loads(response.content)
         positions = [
-            'head', 'neck', 'back', 'chest', 'wrist', 'hands', 'waist', 'legs',
-            'feet', 'finger1', 'finger2', 'trinket1', 'trinket2', 'mainHand'
+            "head",
+            "neck",
+            "back",
+            "chest",
+            "wrist",
+            "hands",
+            "waist",
+            "legs",
+            "feet",
+            "finger1",
+            "finger2",
+            "trinket1",
+            "trinket2",
+            "mainHand",
         ]
         for position in positions:
             setattr(
                 self,
                 position,
-                str(data['items'][position]['id']) + str(data['items'][position]['itemLevel'])
+                str(data["items"][position]["id"])
+                + str(data["items"][position]["itemLevel"]),
             )
         self.save()
         return self
@@ -59,12 +71,11 @@ class Character(models.Model):
 
 
 class SimcRank(models.Model):
-    character = models.ForeignKey(Character)
+    character = models.ForeignKey(Character, on_delete=models.CASCADE)
     dps_rank = models.IntegerField()
     rating_time = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        return '{name} - {dps_rank}'.format(
-            name=self.character.name,
-            dps_rank=self.dps_rank
+        return "{name} - {dps_rank}".format(
+            name=self.character.name, dps_rank=self.dps_rank
         )

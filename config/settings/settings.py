@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "corsheaders",
+    "channels",
     "chrome_homepage",
     "django_extensions",
     "easy_thumbnails",
@@ -51,7 +52,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "todolist",
     "wow_monitor",
-    "halfhalf",
+    "ifthen",
 ]
 
 MIDDLEWARE = [
@@ -84,6 +85,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "config.wsgi.application"
+ASGI_APPLICATION = "config.routing.application"
 
 
 # Database

@@ -1,8 +1,8 @@
 from django.test.testcases import TestCase
 
 from .models import Player, Game, Move
-from .if_statements import STATEMENTS as IF_STATEMENTS
-from .then_statements import STATEMENTS as THEN_STATEMENTS
+from .statements.ifs import STATEMENTS as IF_STATEMENTS
+from .statements.thens import STATEMENTS as THEN_STATEMENTS
 
 
 class GameTestCases(TestCase):
@@ -19,8 +19,8 @@ class GameTestCases(TestCase):
                 game = Game.objects.create(player1=player1, player2=player2)
                 move = Move(
                     game=game,
-                    if_statement=if_statement[0],
-                    then_statement=then_statement[0],
+                    if_statement=if_statement,
+                    then_statement=then_statement,
                 )
                 print("\n------------------------\n")
                 print("Player status before move:")

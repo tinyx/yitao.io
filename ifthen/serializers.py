@@ -1,6 +1,8 @@
 from rest_framework import serializers
 
-from .models import Game, Move
+from .models import Game, Move, Player
+from .statements.ifs import STATEMENTS as IF_STATEMENTS
+from .statements.thens import STATEMENTS as THEN_STATEMENTS
 
 
 class MoveSerializer(serializers.ModelSerializer):
@@ -9,7 +11,9 @@ class MoveSerializer(serializers.ModelSerializer):
     """
 
     if_statement = serializers.SerializerMethodField()
+    if_statement_options = serializers.SerializerMethodField()
     then_statement = serializers.SerializerMethodField()
+    then_statement_options = serializers.SerializerMethodField()
 
     class Meta:
         model = Move
@@ -28,16 +32,44 @@ class MoveSerializer(serializers.ModelSerializer):
         Return if_statement if the move has been completed, otherwise empty string
         """
         if obj.is_complete:
-            return obj.if_statement
+            return IF_STATEMENTS[obj.if_statement].description
         return ""
+
+    def get_if_statement_options(self, obj):
+        """
+        Return if_statement_options
+        """
+        return [
+            IF_STATEMENTS[statement_id].description
+            for statement_id in obj.if_statement_options.split(",")
+        ]
 
     def get_then_statement(self, obj):
         """
         Return then_statement if the move has been completed, otherwise empty string
         """
         if obj.is_complete:
-            return obj.then_statement
+            return THEN_STATEMENTS[obj.then_statement].description
         return ""
+
+    def get_then_statement_options(self, obj):
+        """
+        Return then_statement_options
+        """
+        return [
+            THEN_STATEMENTS[statement_id].description
+            for statement_id in obj.then_statement_options.split(",")
+        ]
+
+
+class PlayerSerializer(serializers.ModelSerializer):
+    """
+    Model serializer for Player
+    """
+
+    class Meta:
+        model = Player
+        fields = ("hp", "attack", "defense", "agility")
 
 
 class GameSerializer(serializers.ModelSerializer):
@@ -46,8 +78,25 @@ class GameSerializer(serializers.ModelSerializer):
     """
 
     state = serializers.CharField()
-    moves = MoveSerializer(source="move_set", many=True, read_only=True)
+    previous_moves = serializers.SerializerMethodField()
 
     class Meta:
         model = Game
-        fields = ("state", "guid", "player1_user", "player2_user", "moves")
+        fields = ("state", "guid", "player1_user", "player2_user", "previous_moves")
+
+    def get_previous_moves(self, obj):
+        """
+        Assemble previous moves with Move stats and Player stats
+        """
+        moves = []
+        for move in obj.move_set.order_by("id"):
+            if move.is_complete:
+                obj.play_single_move(move)
+            moves.append(
+                {
+                    "move": MoveSerializer(move).data,
+                    "player1_stats": PlayerSerializer(obj.player1).data,
+                    "player2_stats": PlayerSerializer(obj.player2).data,
+                }
+            )
+        return moves

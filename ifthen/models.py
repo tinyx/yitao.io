@@ -267,6 +267,17 @@ class Game(models.Model):
         if last_move.is_complete:
             self.play()
 
+    def play_single_move(self, move):
+        """
+        Evaluate a single move on the current game
+        Move is passed in as a parameter so you can potentially apply any arbitrary move to a game
+        just to see the outcome
+        """
+        if move.is_complete:
+            move.evaluate()
+        else:
+            raise ValidationError("You are playing a move that's not completed")
+
     def play(self):
         """
         TRY to apply given move on the game and see what happens
@@ -277,9 +288,10 @@ class Game(models.Model):
             raise ValidationError("This game is already over")
         self.refresh_from_db()
         for move in self.move_set.order_by("id"):
-            if not move.is_complete:
+            try:
+                self.play_single_move(move)
+            except ValidationError:
                 break
-            move.evaluate()
         if self.player1.is_dead or self.player2.is_dead:
             if self.player1.is_dead and self.player2.is_dead:
                 self.is_draw = True

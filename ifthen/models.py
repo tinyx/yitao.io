@@ -1,3 +1,4 @@
+import random
 import uuid
 
 from django.db import models
@@ -238,9 +239,9 @@ class Game(models.Model):
             raise ValidationError("A move cannot be generated right now")
         self.move_set.create(
             if_user=self.player1_user,
-            if_statement_options=",".join(list(IF_STATEMENTS.keys())[:3]),
+            if_statement_options=",".join(random.choices(list(IF_STATEMENTS.keys()), 3)),
             then_user=self.player2_user,
-            then_statement_options=",".join(list(THEN_STATEMENTS.keys())[:3]),
+            then_statement_options=",".join(random.choices(list(THEN_STATEMENTS.keys()), 3)),
         )
 
     def make_move(self, user, statement_id):

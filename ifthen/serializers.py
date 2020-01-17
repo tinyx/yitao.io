@@ -32,15 +32,18 @@ class MoveSerializer(serializers.ModelSerializer):
         Return if_statement if the move has been completed, otherwise empty string
         """
         if obj.is_complete:
-            return IF_STATEMENTS[obj.if_statement].description
-        return ""
+            return {
+                "statement": IF_STATEMENTS[obj.if_statement].description,
+                "id": obj.if_statement,
+            }
+        return None
 
     def get_if_statement_options(self, obj):
         """
         Return if_statement_options
         """
         return [
-            IF_STATEMENTS[statement_id].description
+            {"statement": IF_STATEMENTS[statement_id].description, "id": statement_id}
             for statement_id in obj.if_statement_options.split(",")
         ]
 
@@ -49,15 +52,18 @@ class MoveSerializer(serializers.ModelSerializer):
         Return then_statement if the move has been completed, otherwise empty string
         """
         if obj.is_complete:
-            return THEN_STATEMENTS[obj.then_statement].description
-        return ""
+            return {
+                "statement": THEN_STATEMENTS[obj.then_statement].description,
+                "id": obj.then_statement,
+            }
+        return None
 
     def get_then_statement_options(self, obj):
         """
         Return then_statement_options
         """
         return [
-            THEN_STATEMENTS[statement_id].description
+            {"statement": THEN_STATEMENTS[statement_id].description, "id": statement_id}
             for statement_id in obj.then_statement_options.split(",")
         ]
 
@@ -78,13 +84,13 @@ class GameSerializer(serializers.ModelSerializer):
     """
 
     state = serializers.CharField()
-    previous_moves = serializers.SerializerMethodField()
+    moves = serializers.SerializerMethodField()
 
     class Meta:
         model = Game
-        fields = ("state", "guid", "player1_user", "player2_user", "previous_moves")
+        fields = ("state", "guid", "player1_user", "player2_user", "moves")
 
-    def get_previous_moves(self, obj):
+    def get_moves(self, obj):
         """
         Assemble previous moves with Move stats and Player stats
         """

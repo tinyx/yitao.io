@@ -18,6 +18,7 @@ DESCRIPTIONS = {
     "0002": "Your HP is higher than 15",
     "0003": "You have no defense",
     "0004": "Earth still exists",
+    "0005": "Your attack is exactly 10",
 }
 
 STATEMENTS = {}

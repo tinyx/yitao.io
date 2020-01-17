@@ -7,6 +7,7 @@ backports.shutil-get-terminal-size==1.0.0
 certifi==2018.10.15
 cffi==1.13.2
 channels==2.4.0
+channels_redis==2.4.1
 chardet==3.0.4
 constantly==15.1.0
 cryptography==2.8

@@ -18,6 +18,7 @@ class MoveSerializer(serializers.ModelSerializer):
     class Meta:
         model = Move
         fields = (
+            "guid",
             "if_user",
             "if_statement_options",
             "if_statement",

@@ -239,9 +239,11 @@ class Game(models.Model):
             raise ValidationError("A move cannot be generated right now")
         self.move_set.create(
             if_user=self.player1_user,
-            if_statement_options=",".join(random.choices(list(IF_STATEMENTS.keys()), k=3)),
+            if_statement_options=",".join(random.sample(list(IF_STATEMENTS.keys()), 3)),
             then_user=self.player2_user,
-            then_statement_options=",".join(random.choices(list(THEN_STATEMENTS.keys()), k=3)),
+            then_statement_options=",".join(
+                random.sample(list(THEN_STATEMENTS.keys()), 3)
+            ),
         )
 
     def make_move(self, user, statement_id):
@@ -254,14 +256,20 @@ class Game(models.Model):
         last_move = self.get_last_move()
         if last_move.if_user == user:
             if last_move.if_statement == "":
-                last_move.if_statement = statement_id
-                last_move.save()
+                if statement_id in last_move.if_statement_options:
+                    last_move.if_statement = statement_id
+                    last_move.save()
+                else:
+                    raise ValidationError("You can only choose a move from available moves")
             else:
                 raise ValidationError("You cannot retract your previous choice")
         elif last_move.then_user == user:
             if last_move.then_statement == "":
-                last_move.then_statement = statement_id
-                last_move.save()
+                if statement_id in last_move.then_statement_options:
+                    last_move.then_statement = statement_id
+                    last_move.save()
+                else:
+                    raise ValidationError("You can only choose a move from available moves")
             else:
                 raise ValidationError("you cannot retract your previous choice")
         last_move.refresh_from_db()
@@ -311,6 +319,9 @@ class Move(models.Model):
     Model holds information of a move
     """
 
+    guid = models.UUIDField(
+        default=uuid.uuid4, editable=False, help_text="GUID of this move"
+    )
     game = models.ForeignKey(
         Game, on_delete=models.CASCADE, help_text="The game that this move happens in"
     )

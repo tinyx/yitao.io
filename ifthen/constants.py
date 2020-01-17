@@ -49,3 +49,5 @@ class MessageType(Enum):
     SETUP_GAME = "setup game"
     MAKE_MOVE = "make move"
     ERROR = "error"
+
+    REFRESH_GAME = "refresh game"

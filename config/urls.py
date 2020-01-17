@@ -18,7 +18,9 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views.static import serve
+from rest_framework_jwt.views import obtain_jwt_token
 
+from main.views import create_user
 from chrome_homepage.urls import urlpatterns as chrome_homepage_url
 from gallery.urls import urlpatterns as gallery_url
 from todolist.urls import urlpatterns as todolist_url
@@ -37,4 +39,6 @@ urlpatterns = [
     url(r"^wow-monitor/", include(wow_monitor_url)),
     url(r"^rps/new", RpsProxyView.as_view(), name="rps_new"),
     url(r"^ifthen/", include(ifthen_url)),
+    url(r"^api-token-auth/", obtain_jwt_token),
+    url(r"^api-token-register/", create_user),
 ]

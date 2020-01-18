@@ -86,10 +86,25 @@ class GameSerializer(serializers.ModelSerializer):
 
     state = serializers.CharField()
     moves = serializers.SerializerMethodField()
+    player1_initial_stats = PlayerSerializer(source="player1")
+    player2_initial_stats = PlayerSerializer(source="player2")
+    winner = serializers.IntegerField(source="winner__user")
+    loser = serializers.IntegerField(source="loser__user")
 
     class Meta:
         model = Game
-        fields = ("state", "guid", "player1_user", "player2_user", "moves")
+        fields = (
+            "state",
+            "guid",
+            "player1_user",
+            "player1_initial_stats",
+            "player2_user",
+            "player2_initial_stats",
+            "moves",
+            "winner",
+            "loser",
+            "is_draw",
+        )
 
     def get_moves(self, obj):
         """

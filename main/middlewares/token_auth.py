@@ -14,6 +14,7 @@ class TokenAuthMiddleware:
         self.inner = inner
 
     def __call__(self, scope):
+        scope["user"] = AnonymousUser()
         try:
             query = parse.parse_qs(scope["query_string"].decode("utf-8"))["jwt"][0]
             if query:
@@ -33,7 +34,6 @@ class TokenAuthMiddleware:
 
             return self.inner(scope)
         except:
-            scope["user"] = AnonymousUser()
             return self.inner(scope)
 
 

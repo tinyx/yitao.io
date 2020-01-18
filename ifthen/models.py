@@ -141,7 +141,7 @@ class Game(models.Model):
         help_text="The user player2 represents",
     )
     winner = models.ForeignKey(
-        Player,
+        User,
         null=True,
         blank=True,
         on_delete=models.CASCADE,
@@ -149,7 +149,7 @@ class Game(models.Model):
         help_text="Winner of the game",
     )
     loser = models.ForeignKey(
-        Player,
+        User,
         null=True,
         blank=True,
         on_delete=models.CASCADE,
@@ -305,11 +305,11 @@ class Game(models.Model):
             if self.player1.is_dead and self.player2.is_dead:
                 self.is_draw = True
             if self.player1.is_dead:
-                self.winner = self.player2
-                self.loser = self.player1
+                self.winner = self.player2_user
+                self.loser = self.player1_user
             if self.player2.is_dead:
-                self.winner = self.player1
-                self.loser = self.player2
+                self.winner = self.player1_user
+                self.loser = self.player2_user
             return self.save()
         self.generate_empty_move()
 

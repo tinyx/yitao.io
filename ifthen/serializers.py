@@ -85,9 +85,9 @@ class GameSerializer(serializers.ModelSerializer):
     """
 
     state = serializers.CharField()
+    player1_initial_stats = serializers.SerializerMethodField()
+    player2_initial_stats = serializers.SerializerMethodField()
     moves = serializers.SerializerMethodField()
-    player1_initial_stats = PlayerSerializer(source="player1")
-    player2_initial_stats = PlayerSerializer(source="player2")
 
     class Meta:
         model = Game
@@ -103,6 +103,24 @@ class GameSerializer(serializers.ModelSerializer):
             "loser",
             "is_draw",
         )
+
+    def get_player1_initial_stats(self, obj):
+        """
+        Return player1 stats fetched directly from database
+        """
+        try:
+            return PlayerSerializer(Player.objects.get(id=obj.player1.id)).data
+        except (Player.DoesNotExist, AttributeError):
+            return None
+
+    def get_player2_initial_stats(self, obj):
+        """
+        Return player2 stats fetched directly from database
+        """
+        try:
+            return PlayerSerializer(Player.objects.get(id=obj.player2.id)).data
+        except (Player.DoesNotExist, AttributeError):
+            return None
 
     def get_moves(self, obj):
         """

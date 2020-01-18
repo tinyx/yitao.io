@@ -25,6 +25,7 @@ class TokenAuthMiddleware:
 
             return self.inner(scope)
         except:
+            scope["user"] = AnonymousUser()
             return self.inner(scope)
 
 

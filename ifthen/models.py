@@ -53,6 +53,26 @@ class Character(models.Model):
         self.save()
 
 
+class PlayerManager(models.Manager):
+    """
+    Manager method provides helper method for model Player
+    """
+    def create_player(self):
+        """
+        Create a new player with random stats
+        """
+        total_points = 30  # Set to 30 for now
+        attack = random.randint(0, total_points)
+        total_points = total_points - attack
+        defense = random.randint(0, total_points)
+        total_points = total_points - defense
+        agility = total_points
+        hp = 30  # Set to 30 for now
+        return self.get_queryset().create(
+            attack=attack, defense=defense, agility=agility, hp=hp
+        )
+
+
 class Player(models.Model):
     """
     Model that holds information to represent a player
@@ -74,6 +94,8 @@ class Player(models.Model):
     hp = models.IntegerField(
         blank=False, null=False, help_text="Current health point of this player"
     )
+
+    objects = PlayerManager()
 
     def __str__(self):
         """
@@ -229,8 +251,8 @@ class Game(models.Model):
         Allow user to distribute stats on their own
         FOR NOW, SKIPPING THAT AND PRESET THE SAME STATS FOR BOTH PLAYERS
         """
-        self.player1 = Player.objects.create(attack=10, defense=10, agility=10, hp=30)
-        self.player2 = Player.objects.create(attack=10, defense=10, agility=10, hp=30)
+        self.player1 = Player.objects.create_player()
+        self.player2 = Player.objects.create_player()
         self.save()
         self.generate_empty_move()
 
@@ -260,7 +282,9 @@ class Game(models.Model):
                     last_move.if_statement = statement_id
                     last_move.save()
                 else:
-                    raise ValidationError("You can only choose a move from available moves")
+                    raise ValidationError(
+                        "You can only choose a move from available moves"
+                    )
             else:
                 raise ValidationError("You cannot retract your previous choice")
         elif last_move.then_user == user:
@@ -269,7 +293,9 @@ class Game(models.Model):
                     last_move.then_statement = statement_id
                     last_move.save()
                 else:
-                    raise ValidationError("You can only choose a move from available moves")
+                    raise ValidationError(
+                        "You can only choose a move from available moves"
+                    )
             else:
                 raise ValidationError("you cannot retract your previous choice")
         last_move.refresh_from_db()

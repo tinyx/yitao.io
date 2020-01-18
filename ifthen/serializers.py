@@ -88,8 +88,6 @@ class GameSerializer(serializers.ModelSerializer):
     moves = serializers.SerializerMethodField()
     player1_initial_stats = PlayerSerializer(source="player1")
     player2_initial_stats = PlayerSerializer(source="player2")
-    winner = serializers.IntegerField(source="winner__user")
-    loser = serializers.IntegerField(source="loser__user")
 
     class Meta:
         model = Game

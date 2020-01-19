@@ -18,7 +18,7 @@ DESCRIPTIONS = {
     "0002": "You will attack your opponent",
     "0003": "You lose all hp",
     "0004": "You steal 5 hp from your opponent",
-    "0005": "You swap your defense and your hp",
+    "0005": "You swap your attack and your hp",
 }
 
 STATEMENTS = {}

@@ -1,9 +1,7 @@
 import jwt
-import traceback
 from channels.auth import AuthMiddlewareStack
 from django.contrib.auth.models import AnonymousUser, User
 from django.conf import LazySettings
-from jwt import InvalidSignatureError, ExpiredSignatureError, DecodeError
 from urllib import parse
 
 settings = LazySettings()
@@ -21,10 +19,12 @@ class TokenAuthMiddleware:
                     user_jwt = jwt.decode(query, settings.SECRET_KEY,)
                     scope["user"] = User.objects.get(id=user_jwt["user_id"])
                 except Exception as e:
+                    print(e)
                     scope["user"] = AnonymousUser()
 
             return self.inner(scope)
-        except:
+        except Exception as e:
+            print(e)
             scope["user"] = AnonymousUser()
             return self.inner(scope)
 

@@ -9,6 +9,7 @@ from rest_framework.response import Response
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
+        fields = "__all__"
 
 
 @api_view(["post"])

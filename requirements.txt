@@ -59,4 +59,4 @@ Unidecode==0.4.21
 urllib3==1.24.2
 wcwidth==0.1.7
 zipp==0.6.0
-zope.interface==4.7.1
+zope.interface==5.2.0

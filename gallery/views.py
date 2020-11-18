@@ -17,4 +17,8 @@ class ImageListView(generics.ListAPIView):
     serializer_class = ImageSerializer
 
     def get_queryset(self):
+        category = self.kwargs.get('category')
+        print(category)
+        if category:
+            return Image.objects.filter(category__name__iexact=category).order_by('order')
         return Image.objects.all().order_by('order')

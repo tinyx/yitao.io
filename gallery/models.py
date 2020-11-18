@@ -38,7 +38,7 @@ class Image(models.Model):
         help_text="The image file",
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -47,7 +47,7 @@ class Category(models.Model):
         max_length=255, null=False, blank=False, help_text="The name of the category"
     )
     name_cn = models.CharField(
-        max_length=255, null=False, blank=False, help_text="The name of the category"
+        max_length=255, null=True, blank=True, help_text="The name of the category"
     )
     order = models.IntegerField(
         default=0, null=False, blank=False, help_text="The order of this category"
@@ -56,8 +56,11 @@ class Category(models.Model):
         null=False,
         blank=False,
         default=False,
-        help_text="Should this category be rendered full zied.",
+        help_text="Should this category be rendered full sized.",
     )
 
-    def __unicode__(self):
+    class Meta(object):
+        verbose_name_plural = "Categories"
+
+    def __str__(self):
         return self.name
